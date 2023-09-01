@@ -21,7 +21,11 @@ namespace BookStore.Admin.Services
         }
 
 
+<<<<<<< HEAD
         //USER REGISTRATION:-
+=======
+        //ADMIN REGISTRATION:-
+>>>>>>> Admin_Login_API
         public AdminEntity Registration(AdminRegistrationModel model)
         {
             try
@@ -66,7 +70,38 @@ namespace BookStore.Admin.Services
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
+<<<<<<< HEAD
         
+=======
+
+
+        //ADMIN LOGIN:-
+        public LoginResult AdminLogin(AdminLoginModel model)
+        {
+            try
+            {
+                var result = adminContext.Admin.FirstOrDefault
+                    (data => data.Email == model.Email && data.Password == model.Password);
+                if (result != null)
+                {
+                    return new LoginResult
+                    {
+                        AdminEntity = result,
+                        JwtToken = GenerateJwtToken(result.Email, result.AdminID)
+                    };
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+>>>>>>> Admin_Login_API
 
 
     }
