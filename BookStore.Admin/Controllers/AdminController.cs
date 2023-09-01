@@ -33,5 +33,23 @@ namespace BookStore.Admin.Controllers
         }
 
 
+
+        //ADMIN LOGIN:-
+        [HttpPost]
+        [Route("Login")]
+        public IActionResult Login(AdminLoginModel model)
+        {
+            var result = adminRepo.AdminLogin(model);
+            if (result != null)
+            {
+                return Ok(new { success = true, message = "Admin Login Successful", data = result });
+            }
+            else
+            {
+                return NotFound(new { success = false, message = "Admin Login Failed", data = result });
+
+            }
+        }
+
     }
 }
