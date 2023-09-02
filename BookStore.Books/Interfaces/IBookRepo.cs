@@ -6,5 +6,6 @@ namespace BookStore.Books.Interfaces
     public interface IBookRepo
     {
         public BookEntity AddBook(BookAddModel model);
+        public List<BookEntity> GetAllBooks();
     }
 }

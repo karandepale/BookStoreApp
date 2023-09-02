@@ -37,7 +37,21 @@ namespace BookStore.Books.Controllers
 
 
 
-
+        // GET ALL BOOKS:-
+        [HttpGet]
+        [Route("GetAllBooks")]
+        public IActionResult GetAllBooks()
+        {
+            var result = bookRepo.GetAllBooks();
+            if (result != null)
+            {
+                return Ok(new { success = true, message = "Book List Getting Successful", data = result });
+            }
+            else
+            {
+                return NotFound(new { success = false, message = "Books Not Found.", data = result });
+            }
+        }
 
 
 
