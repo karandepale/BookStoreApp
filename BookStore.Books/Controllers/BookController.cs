@@ -74,6 +74,7 @@ namespace BookStore.Books.Controllers
 
 
         // UPDATE BOOK:-
+        [Authorize(Roles = "Admin")]
         [HttpPut]
         [Route("UpdateBook")]
         public IActionResult UpdateBook(BookEditModel model, long BookID)
