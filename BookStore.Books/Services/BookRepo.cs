@@ -2,6 +2,7 @@
 using BookStore.Books.Entity;
 using BookStore.Books.Interfaces;
 using BookStore.Books.Model;
+using Microsoft.AspNetCore.Mvc;
 
 namespace BookStore.Books.Services
 {
@@ -96,7 +97,21 @@ namespace BookStore.Books.Services
 
 
 
-
+        // UPDATE BOOK:-
+        [HttpPut]
+        [Route("UpdateBook")]
+        public IActionResult UpdateBook(BookEditModel model, long BookID)
+        {
+            var result = bookRepo.UpdateBook(model, BookID);
+            if (result != null)
+            {
+                return Ok(new { success = true, message = "Book Updated Successfully", data = result });
+            }
+            else
+            {
+                return NotFound(new { success = false, message = "Book Not Updated.", data = result });
+            }
+        }
 
     }
 }

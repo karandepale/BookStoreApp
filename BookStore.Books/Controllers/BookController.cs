@@ -72,5 +72,21 @@ namespace BookStore.Books.Controllers
         }
 
 
+
+        // UPDATE BOOK:-
+        [HttpPut]
+        [Route("UpdateBook")]
+        public IActionResult UpdateBook(BookEditModel model, long BookID)
+        {
+            var result = bookRepo.UpdateBook(model, BookID);
+            if (result != null)
+            {
+                return Ok(new { success = true, message = "Book Updated Successfully", data = result });
+            }
+            else
+            {
+                return NotFound(new { success = false, message = "Book Not Updated.", data = result });
+            }
+        }
     }
 }
