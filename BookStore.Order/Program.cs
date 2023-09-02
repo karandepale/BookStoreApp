@@ -1,3 +1,4 @@
+using BookStore.Order.Context;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -38,7 +39,7 @@ builder.Services.AddAuthentication(options =>
 
 
 
-builder.Services.AddDbContext<BookContext>(options =>
+builder.Services.AddDbContext<OrderContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("OrderrDB"));
 });
