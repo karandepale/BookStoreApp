@@ -59,7 +59,7 @@ builder.Services.AddSwaggerGen(c =>
     {
         Title = "Book",
         Version = "v1",
-        Description = "API's for BookStore Application",
+        Description = "BookStore Application ",
     });
 
     var securitySchema = new OpenApiSecurityScheme
