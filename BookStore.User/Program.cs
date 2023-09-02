@@ -1,4 +1,6 @@
 using BookStore.User.Context;
+using BookStore.User.Interfaces;
+using BookStore.User.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -15,6 +17,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 
+builder.Services.AddTransient<IUserRepo, UserRepo>();
 
 
 builder.Services.AddDbContext<UserContext>(options =>
