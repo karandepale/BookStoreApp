@@ -53,9 +53,16 @@ builder.Services.AddHttpClient("BookApi", client =>
     client.BaseAddress = new Uri("https://localhost:7076/api/");
 });
 
+builder.Services.AddHttpClient("UserApi", client =>
+{
+    client.BaseAddress = new Uri("https://localhost:7117/api/");
+});
+
+
+
 
 builder.Services.AddTransient<IBookRepo, BookRepo>();
-
+builder.Services.AddTransient<IUserRepo, UserRepo>();
 
 
 

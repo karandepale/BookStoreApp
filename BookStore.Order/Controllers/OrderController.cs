@@ -10,9 +10,11 @@ namespace BookStore.Order.Controllers
     public class OrderController : ControllerBase
     {
         private readonly IBookRepo bookRepo;
-        public OrderController(IBookRepo bookRepo)
+        private readonly IUserRepo userRepo;
+        public OrderController(IBookRepo bookRepo, IUserRepo userRepo)
         {
             this.bookRepo = bookRepo;
+            this.userRepo = userRepo;
         }
 
 
@@ -34,5 +36,20 @@ namespace BookStore.Order.Controllers
 
 
 
+        // GET USER DETAILS:
+        [HttpGet]
+        [Route("GetUser_Details")]
+        public async Task<IActionResult> GetUserDetails()
+        {
+            string token = Request.Headers.Authorization.ToString();
+            token = token.Substring("Bearer ".Length);
+
+            UserEntity user = await userRepo.GetUserDetails(token);
+            if (user != null)
+            {
+                return Ok(user);
+            }
+            return BadRequest("unable to get user");
+        }
     }
 }
