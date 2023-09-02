@@ -70,5 +70,33 @@ namespace BookStore.Books.Services
         }
 
 
+
+
+        // GET BOOK BY ID:-
+        public BookEntity GetBookByID(long BookID)
+        {
+            try
+            {
+                var result = bookContext.Book.FirstOrDefault
+                    (data => data.BookID == BookID);
+                if (result != null)
+                {
+                    return result;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
+        }
+
+
+
+
+
     }
 }

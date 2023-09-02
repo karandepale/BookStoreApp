@@ -7,5 +7,6 @@ namespace BookStore.Books.Interfaces
     {
         public BookEntity AddBook(BookAddModel model);
         public List<BookEntity> GetAllBooks();
+        public BookEntity GetBookByID(long BookID);
     }
 }
