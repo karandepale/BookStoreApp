@@ -1,4 +1,6 @@
 using BookStore.Order.Context;
+using BookStore.Order.Interfaces;
+using BookStore.Order.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -46,6 +48,15 @@ builder.Services.AddDbContext<OrderContext>(options =>
 
 
 
+builder.Services.AddHttpClient("BookApi", client =>
+{
+    client.BaseAddress = new Uri("https://localhost:7076/api/");
+});
+
+
+builder.Services.AddTransient<IBookRepo, BookRepo>();
+
+
 
 
 // Configure Swagger with authorization
@@ -53,7 +64,7 @@ builder.Services.AddSwaggerGen(c =>
 {
 c.SwaggerDoc("v1", new OpenApiInfo
 {
-    Title = "Book",
+    Title = "ORDER",
     Version = "v1",
     Description = "BookStore Application ",
 });
