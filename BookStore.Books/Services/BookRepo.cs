@@ -2,7 +2,6 @@
 using BookStore.Books.Entity;
 using BookStore.Books.Interfaces;
 using BookStore.Books.Model;
-using Microsoft.AspNetCore.Mvc;
 
 namespace BookStore.Books.Services
 {
@@ -97,19 +96,33 @@ namespace BookStore.Books.Services
 
 
 
-        // UPDATE BOOK:-
-        [HttpPut]
-        [Route("UpdateBook")]
-        public IActionResult UpdateBook(BookEditModel model, long BookID)
+        //UPDATE BOOK:-
+        public BookEntity UpdateBook(BookEditModel model, long BookID)
         {
-            var result = bookRepo.UpdateBook(model, BookID);
-            if (result != null)
+            try
             {
-                return Ok(new { success = true, message = "Book Updated Successfully", data = result });
+                var bookEntity = bookContext.Book.FirstOrDefault
+                    (data => data.BookID == BookID);
+                if (bookEntity != null)
+                {
+                    bookEntity.BookName = model.BookName;
+                    bookEntity.Description = model.Description;
+                    bookEntity.Author = model.Author;
+                    bookEntity.Quantity = model.Quantity;
+                    bookEntity.DiscountPrice = model.DiscountPrice;
+                    bookEntity.ActualPrice = model.ActualPrice;
+
+                    bookContext.SaveChanges();
+                    return bookEntity;
+                }
+                else
+                {
+                    return null;
+                }
             }
-            else
+            catch (System.Exception)
             {
-                return NotFound(new { success = false, message = "Book Not Updated.", data = result });
+                throw;
             }
         }
 
