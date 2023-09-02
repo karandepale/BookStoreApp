@@ -10,5 +10,6 @@ namespace BookStore.User.Interfaces
         public List<UserEntity> GetAllUser();
         public UserEntity GetUserByID(int userID);
         public string ForgotPassword(ForgotPassModel model);
+        public bool ResetPassword(string email, string newPass, string confirmPass);
     }
 }
