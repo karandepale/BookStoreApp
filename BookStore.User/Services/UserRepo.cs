@@ -141,5 +141,31 @@ namespace BookStore.User.Services
                 throw (ex);
             }
         }
+
+
+
+        // FORGOT PASSWORD USINF MSMQ:-
+        public string ForgotPassword(ForgotPassModel model)
+        {
+            try
+            {
+                var result = userContext.User.FirstOrDefault(u => u.Email == model.Email);
+                if (result != null)
+                {
+                    var Token = GenerateJwtToken(result.Email, result.UserID);
+                    MSMQ msmq = new MSMQ();
+                    msmq.SendData2Queue(Token);
+
+                    return Token;
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+
+                throw (ex);
+            }
+        }
+
     }
 }

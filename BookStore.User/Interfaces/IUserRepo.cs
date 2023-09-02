@@ -9,5 +9,6 @@ namespace BookStore.User.Interfaces
         public UserLoginResult UserLogin(UserLoginModel model);
         public List<UserEntity> GetAllUser();
         public UserEntity GetUserByID(int userID);
+        public string ForgotPassword(ForgotPassModel model);
     }
 }

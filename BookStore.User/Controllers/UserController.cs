@@ -86,5 +86,23 @@ namespace BookStore.User.Controllers
                 return NotFound(new { success = false, message = "User List Getting Failed", data = result });
             }
         }
+
+
+
+        // FORGOT PASSWORD:-
+        [HttpPost]
+        [Route("Forgot_Password")]
+        public IActionResult ForgotPassword(ForgotPassModel model)
+        {
+            var result = userRepo.ForgotPassword(model);
+            if (result != null)
+            {
+                return Ok(new { success = true, message = "Forgot pass Token send on your mail Send Successfully" });
+            }
+            else
+            {
+                return NotFound(new { success = false, message = "Forgot pass email not send..." });
+            }
+        }
     }
 }
