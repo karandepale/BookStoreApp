@@ -52,6 +52,7 @@ namespace BookStore.User.Controllers
 
 
 
+        //GET ALL USER:-
         [HttpGet]
         [Route("GetAllUser")]
         public IActionResult GetAllUser()
@@ -67,5 +68,23 @@ namespace BookStore.User.Controllers
             }
         }
 
+
+
+        //GET USER BY ID:-
+        [HttpGet]
+        [Route("GetUser_ByID")]
+        public IActionResult GetUserByID()
+        {
+            int userid = Convert.ToInt32(User.FindFirst("UserID").Value);
+            var result = userRepo.GetUserByID(userid);
+            if (result != null)
+            {
+                return Ok(new { success = true, message = "User List using id Getting Successful", data = result });
+            }
+            else
+            {
+                return NotFound(new { success = false, message = "User List Getting Failed", data = result });
+            }
+        }
     }
 }
