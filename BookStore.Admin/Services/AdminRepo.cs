@@ -21,11 +21,7 @@ namespace BookStore.Admin.Services
         }
 
 
-<<<<<<< HEAD
-        //USER REGISTRATION:-
-=======
-        //ADMIN REGISTRATION:-
->>>>>>> Admin_Login_API
+
         public AdminEntity Registration(AdminRegistrationModel model)
         {
             try
@@ -70,9 +66,7 @@ namespace BookStore.Admin.Services
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
-<<<<<<< HEAD
-        
-=======
+
 
 
         //ADMIN LOGIN:-
@@ -101,7 +95,6 @@ namespace BookStore.Admin.Services
             }
         }
 
->>>>>>> Admin_Login_API
 
 
     }
