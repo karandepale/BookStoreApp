@@ -9,5 +9,6 @@ namespace BookStore.Books.Interfaces
         public List<BookEntity> GetAllBooks();
         public BookEntity GetBookByID(long BookID);
         public BookEntity UpdateBook(BookEditModel model, long BookID);
+        public void DeleteBook(long BookID);
     }
 }

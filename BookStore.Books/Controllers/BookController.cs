@@ -88,5 +88,25 @@ namespace BookStore.Books.Controllers
                 return NotFound(new { success = false, message = "Book Not Updated.", data = result });
             }
         }
+
+
+
+        //DELETE BOOK:-
+        [Authorize(Roles = "Admin")]
+        [HttpDelete]
+        [Route("DeleteBook")]
+        public IActionResult DeleteBook(long BookID)
+        {
+            try
+            {
+                bookRepo.DeleteBook(BookID);
+                return Ok(new { success = true, message = "Book Deleted Successfully" });
+            }
+            catch (System.Exception)
+            {
+                return NotFound(new { success = false, message = "Book Not Deleted." });
+                throw;
+            }
+        }
     }
 }
