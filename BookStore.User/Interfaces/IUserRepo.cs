@@ -7,5 +7,6 @@ namespace BookStore.User.Interfaces
     {
         public UserEntity UserRegistration(UserRegistrationModel model);
         public UserLoginResult UserLogin(UserLoginModel model);
+        public List<UserEntity> GetAllUser();
     }
 }

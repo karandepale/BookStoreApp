@@ -97,6 +97,25 @@ namespace BookStore.User.Services
 
 
 
-
+        //GET ALL USERS:-
+        public List<UserEntity> GetAllUser()
+        {
+            try
+            {
+                var userList = userContext.User.ToList();
+                if (userList != null)
+                {
+                    return userList;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
+        }
     }
 }

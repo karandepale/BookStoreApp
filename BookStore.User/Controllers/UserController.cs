@@ -51,5 +51,21 @@ namespace BookStore.User.Controllers
         }
 
 
+
+        [HttpGet]
+        [Route("GetAllUser")]
+        public IActionResult GetAllUser()
+        {
+            var result = userRepo.GetAllUser();
+            if (result != null)
+            {
+                return Ok(new { success = true, message = "User List Getting Successful", data = result });
+            }
+            else
+            {
+                return NotFound(new { success = false, message = "User List Getting Failed", data = result });
+            }
+        }
+
     }
 }
