@@ -86,5 +86,21 @@ namespace BookStore.Order.Services
 
 
 
+        //REMOVE ORDER:-
+        public bool RemoveOrder(int orderID, int userID)
+        {
+            OrderEntity orderEntity = orderContext.Order.Where(x => x.OrderID == orderID && x.UserID == userID).FirstOrDefault();
+            if (orderEntity != null)
+            {
+                orderContext.Order.Remove(orderEntity);
+                orderContext.SaveChanges();
+
+                return true;
+            }
+            return false;
+        }
+
+
+
     }
 }

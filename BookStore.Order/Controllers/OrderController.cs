@@ -122,6 +122,22 @@ namespace BookStore.Order.Controllers
 
 
 
+        //REMOVE ORDER BY ORDER-ID:-
+        [Authorize]
+        [HttpDelete("removeOrder")]
+        public IActionResult RemoveOrder(int orderID)
+        {
+            int userID = Convert.ToInt32(User.FindFirstValue("UserID"));
+            bool isRemove = orderRepo.RemoveOrder(orderID, userID);
+            if (isRemove != null)
+            {
+                return Ok(isRemove);
+            }
+            return BadRequest("Unable to get order by id...");
+        }
+
+
+
 
 
 
