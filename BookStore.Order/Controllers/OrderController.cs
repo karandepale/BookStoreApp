@@ -97,5 +97,33 @@ namespace BookStore.Order.Controllers
             return BadRequest("Unable to get order...");
         }
 
+
+
+
+        // GET ORDER BY ID:-
+        [Authorize]
+        [HttpGet]
+        [Route("GetOrderBy_ID")]
+        public async Task<IActionResult> GetOrdersByOrderID(int orderID)
+        {
+            string token = Request.Headers.Authorization.ToString();
+            token = token.Substring("Bearer ".Length);
+
+            int userID = Convert.ToInt32(User.FindFirstValue("UserID"));
+
+            OrderEntity orderEntity = await orderRepo.GetOrdersByOrderID(orderID, userID, token);
+            if (orderEntity != null)
+            {
+                return Ok(orderEntity);
+            }
+            return BadRequest("Unable to get order by id...");
+        }
+
+
+
+
+
+
+
     }
 }

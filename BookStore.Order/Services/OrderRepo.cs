@@ -69,6 +69,20 @@ namespace BookStore.Order.Services
 
 
 
+        //GET ORDER BY ORDER-ID:-
+        public async Task<OrderEntity> GetOrdersByOrderID(int orderID, int userID, string token)
+        {
+            OrderEntity orderEntity = orderContext.Order.Where(x => x.OrderID == orderID && x.UserID == userID).FirstOrDefault();
+            if (orderEntity != null)
+            {
+                orderEntity.Book = await bookRepo.GetBookDetails(Convert.ToInt32(orderEntity.BookID));
+                orderEntity.User = await userRepo.GetUserDetails(token);
+
+                return orderEntity;
+            }
+            return null;
+        }
+
 
 
 
