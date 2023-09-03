@@ -63,6 +63,7 @@ builder.Services.AddHttpClient("UserApi", client =>
 
 builder.Services.AddTransient<IBookRepo, BookRepo>();
 builder.Services.AddTransient<IUserRepo, UserRepo>();
+builder.Services.AddTransient<IOrderRepo, OrderRepo>();
 
 
 

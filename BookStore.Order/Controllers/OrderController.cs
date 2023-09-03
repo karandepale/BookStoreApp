@@ -1,5 +1,6 @@
 ﻿using BookStore.Order.Entity;
 using BookStore.Order.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,10 +12,12 @@ namespace BookStore.Order.Controllers
     {
         private readonly IBookRepo bookRepo;
         private readonly IUserRepo userRepo;
-        public OrderController(IBookRepo bookRepo, IUserRepo userRepo)
+        private readonly IOrderRepo orderRepo;
+        public OrderController(IBookRepo bookRepo, IUserRepo userRepo, IOrderRepo orderRepo)
         {
             this.bookRepo = bookRepo;
             this.userRepo = userRepo;
+            this.orderRepo = orderRepo;
         }
 
 
@@ -51,5 +54,26 @@ namespace BookStore.Order.Controllers
             }
             return BadRequest("unable to get user");
         }
+
+
+
+        // PLACE ORDER:-
+        [Authorize]
+        [HttpPost]
+        [Route("Place_Order")]
+        public async Task<IActionResult> PlaceOrder(int bookID, int quantity)
+        {
+            string token = Request.Headers.Authorization.ToString();
+            token = token.Substring("Bearer ".Length);
+
+            OrderEntity orderEntity = await orderRepo.PlaceOrder(bookID, quantity, token);
+            if (orderEntity != null)
+            {
+                return Ok(orderEntity);
+            }
+            return BadRequest("Unable to place order...");
+        }
+
+
     }
 }
