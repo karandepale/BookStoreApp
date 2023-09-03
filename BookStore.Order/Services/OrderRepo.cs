@@ -48,5 +48,29 @@ namespace BookStore.Order.Services
 
 
 
+
+        //GET ALL ORDERS:-
+        public async Task<IEnumerable<OrderEntity>> GetOrders(int userID, string token)
+        {
+            IEnumerable<OrderEntity> result = orderContext.Order.Where(x => x.UserID == userID);
+
+            if (result != null)
+            {
+                foreach (OrderEntity order in result)
+                {
+                    order.Book = await bookRepo.GetBookDetails(Convert.ToInt32(order.BookID));
+                    order.User = await userRepo.GetUserDetails(token);
+                }
+                return result;
+            }
+            return null;
+        }
+
+
+
+
+
+
+
     }
 }

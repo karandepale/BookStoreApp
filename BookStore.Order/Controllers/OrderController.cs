@@ -3,6 +3,7 @@ using BookStore.Order.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace BookStore.Order.Controllers
 {
@@ -74,6 +75,27 @@ namespace BookStore.Order.Controllers
             return BadRequest("Unable to place order...");
         }
 
+
+
+
+        //GET ALL ORDER:-
+        [Authorize]
+        [HttpGet]
+        [Route("GetAll_Orders")]
+        public async Task<IActionResult> GetOrders()
+        {
+            string token = Request.Headers.Authorization.ToString();
+            token = token.Substring("Bearer ".Length);
+
+            int userID = Convert.ToInt32(User.FindFirstValue("UserID"));
+
+            IEnumerable<OrderEntity> orderEntity = await orderRepo.GetOrders(userID, token);
+            if (orderEntity != null)
+            {
+                return Ok(orderEntity);
+            }
+            return BadRequest("Unable to get order...");
+        }
 
     }
 }
